@@ -6,7 +6,15 @@ import plotly.graph_objects as go
 import time
 
 
+def local_css(file_name):
+    """Function to incorporate local CSS files into the Streamlit app."""
+    with open(file_name, "r") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
 def run():
+    st.set_page_config(layout="wide")
+    local_css("styles_1.css")  # Update with the correct path if needed
     st.title("Modern Looking Graphs - Performance Ratings and Historical Data")
 
     if "analyzed" not in st.session_state:
