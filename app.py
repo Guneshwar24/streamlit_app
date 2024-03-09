@@ -3,41 +3,52 @@ import time
 
 
 def local_css(file_name):
+    """Function to incorporate local CSS files into the Streamlit app."""
     with open(file_name, "r") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def search_and_process_in_database():
+    """Simulates the process of searching and selecting themes from a database."""
     progress_text = st.empty()
     progress_bar = st.progress(0)
 
     progress_text.subheader("Finding relevant themes...")
     progress_bar.progress(25)
-    time.sleep(2)  # Simulates processing time
+    time.sleep(2)  # Simulates the time taken to find themes
 
     progress_text.subheader(
         "Found 3 themes in the documents! Please select the one you want to focus on."
     )
-    progress_bar.progress(100)  # Ensure the bar runs to the end
-    time.sleep(2)  # Give users a moment to see the completion
+    progress_bar.progress(100)
+    time.sleep(2)  # Simulated delay
 
-    # Note the change here: We're now preserving the theme selection on the screen.
-    themes = ["Theme 1", "Theme 2", "Theme 3"]  # Mock themes for demonstration
-    selected_themes = st.multiselect("Select Relevant Themes:", themes)
+    # Available themes
+    themes = ["Theme 1", "Theme 2", "Theme 3"]
 
-    if st.button("Enter", key="process_themes"):
-        progress_text.empty()
-        progress_bar.empty()
-        progress_text.subheader(
-            "Searching in database - Rettsdata Neural Network activated."
-        )
-        progress_bar = st.progress(25)  # Reinitialize progress bar for new task
-        time.sleep(2)  # Simulates processing time
+    # Display the themes in Streamlit
+    st.write("### Available Themes:")
+    for i, theme in enumerate(themes, start=1):
+        st.write(f"{i}. {theme}")
+    time.sleep(2)  # Simulated delay
 
-        progress_text.subheader("Found historical cases - Rettsdata AI processing.")
+    process_selected_theme()
+
+
+def process_selected_theme():
+    """Handles the post-theme selection processing."""
+    with st.spinner("Processing... Please wait"):
+        progress_text = st.empty()
+        progress_bar = st.progress(25)
+        progress_text.subheader("Searching in database - Neural Network activated.")
+        time.sleep(2)
+
+        progress_bar.progress(50)
+        progress_text.subheader("Found historical cases - AI processing.")
+        time.sleep(2)
         progress_bar.progress(100)
-        time.sleep(2)  # Give users a moment to see the completion
 
+        time.sleep(1)  # Simulate finalization process.
         progress_text.empty()
         progress_bar.empty()
         st.success("Process Completed Successfully!")
@@ -45,9 +56,7 @@ def search_and_process_in_database():
 
 def main():
     st.set_page_config(layout="wide")
-    local_css(
-        "/Users/magedhelmy/Desktop/code/playground/OsloHackathonAI2024/streamlit_app/streamlit_app/styles.css"
-    )
+    local_css("styles.css")  # Update with the correct path if needed
 
     st.markdown(
         "<h1 style='text-align: center; font-size: 40px;'>The Next-Generation Lawyer Training Experience</h1>",
@@ -61,9 +70,7 @@ def main():
 
     with center_col:
         if not st.session_state["authenticated"]:
-            st.image(
-                "/Users/magedhelmy/Desktop/code/playground/OsloHackathonAI2024/streamlit_app/streamlit_app/iimage.webp"
-            )
+            st.image("image.webp")  # Update with the correct path if needed
             if st.button("Login"):
                 st.session_state["authenticated"] = True
                 st.experimental_rerun()
@@ -73,17 +80,14 @@ def main():
             )
 
             if uploaded_files:
-                if "start_learning_clicked" not in st.session_state:
-                    st.session_state["start_learning_clicked"] = False
-
-                # Use an empty placeholder for the button to clear it later
                 start_learning_spot = st.empty()
 
-                if not st.session_state["start_learning_clicked"]:
+                if not st.session_state.get("start_learning_clicked"):
                     if start_learning_spot.button("Start Learning the documents"):
                         st.session_state["start_learning_clicked"] = True
-                        start_learning_spot.empty()  # Emptying the spot to remove the button
-                        search_and_process_in_database()  # Initiate the theme finding process here without removing the theme selection until "Enter" is pressed
+                        start_learning_spot.empty()
+                        search_and_process_in_database()
+                        # process_selected_theme is now called within search_and_process_in_database if a theme is selected
 
 
 if __name__ == "__main__":

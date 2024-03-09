@@ -1,0 +1,34 @@
+/* style.css */
+html, body, [class*="css"] {
+    font-family: 'Arial', sans-serif;
+    color: #0A9396;
+    background-color: #E9D8A6;
+}
+
+/* style.css adjustments for buttons */
+.stButton>button {
+    width: 100%;
+    border-radius: 20px;
+    background-color: #EE9B00; /* Original background color */
+    color: #000; /* Text color */
+    font-size: 20px;
+    padding: 10px 24px;
+    margin: 10px 0;
+    border: none; /* Remove any border */
+    transition: background-color 0.2s; /* Smooth transition for background color change */
+    outline: none; /* Remove outline on focus */
+
+}
+
+/* Ensuring no color change on hover, only a subtle shadow for visual feedback */
+.stButton>button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Subtle shadow effect on hover */
+    color: inherit; /* Keeps the font color the same as in the normal state */
+}
+
+.stButton>button:active {
+    background-color: #008000; /* Change to green when clicked */
+    color: #FFF; /* Keep text color white for good contrast */
+    border: none; /* Ensuring no border is shown */
+}
+
