@@ -55,7 +55,8 @@ def process_selected_theme():
 
 
 def main():
-    st.set_page_config(layout="wide")
+
+    st.set_page_config(layout="wide", page_title="Hovedside")
     local_css("styles.css")  # Update with the correct path if needed
 
     st.markdown(
@@ -75,9 +76,7 @@ def main():
                 st.session_state["authenticated"] = True
                 st.experimental_rerun()
         else:
-            uploaded_files = st.file_uploader(
-                "Velg en fil", accept_multiple_files=True
-            )
+            uploaded_files = st.file_uploader("Velg en fil", accept_multiple_files=True)
 
             if uploaded_files:
                 start_learning_spot = st.empty()
