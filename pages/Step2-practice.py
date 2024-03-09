@@ -66,8 +66,6 @@ def simulate_audio_activity():
         # Update progress to simulate time passing
         time.sleep(1)  # Simulate a delay, mimicking real-time feedback
 
-    progress_bar.empty()  # Clear progress bar after completion
-
     st.success("Practice session completed!")
 
 
