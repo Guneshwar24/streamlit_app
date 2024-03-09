@@ -9,25 +9,25 @@ def local_css(file_name):
 
 
 def search_and_process_in_database():
-    """Simulates the process of searching and selecting themes from a database."""
+    """Simulerer prosessen med å søke og velge temaer fra en database."""
     progress_text = st.empty()
     progress_bar = st.progress(0)
 
-    progress_text.subheader("Finding relevant themes...")
+    progress_text.subheader("Å finne relevante temaer...")
     progress_bar.progress(25)
     time.sleep(2)  # Simulates the time taken to find themes
 
     progress_text.subheader(
-        "Found 3 themes in the documents! Please select the one you want to focus on."
+        "Fant 3 temaer i dokumentene! Vennligst velg det du vil fokusere på."
     )
     progress_bar.progress(100)
     time.sleep(2)  # Simulated delay
 
     # Available themes
-    themes = ["Theme 1", "Theme 2", "Theme 3"]
+    themes = ["Eiendomsrett", "Menneskerett", "Prosessrett"]
 
     # Display the themes in Streamlit
-    st.write("### Available Themes:")
+    st.write("### Tilgjengelige temae:")
     for i, theme in enumerate(themes, start=1):
         st.write(f"{i}. {theme}")
     time.sleep(2)  # Simulated delay
@@ -36,22 +36,22 @@ def search_and_process_in_database():
 
 
 def process_selected_theme():
-    """Handles the post-theme selection processing."""
-    with st.spinner("Processing... Please wait"):
+    """Håndterer etterbehandlingen av temaseleksjonen."""
+    with st.spinner("Behandling pågår... Vennligst vent"):
         progress_text = st.empty()
         progress_bar = st.progress(25)
-        progress_text.subheader("Searching in database - Neural Network activated.")
+        progress_text.subheader("Søker i database - Nevralnett aktivert.")
         time.sleep(2)
 
         progress_bar.progress(50)
-        progress_text.subheader("Found historical cases - AI processing.")
+        progress_text.subheader("Fant historiske tilfeller - AI-behandling pågår.")
         time.sleep(2)
         progress_bar.progress(100)
 
         time.sleep(1)  # Simulate finalization process.
         progress_text.empty()
         progress_bar.empty()
-        st.success("Process Completed Successfully!")
+        st.success("Prosess fullført vellykket!")
 
 
 def main():
@@ -76,14 +76,14 @@ def main():
                 st.experimental_rerun()
         else:
             uploaded_files = st.file_uploader(
-                "Choose a file", accept_multiple_files=True
+                "Velg en fil", accept_multiple_files=True
             )
 
             if uploaded_files:
                 start_learning_spot = st.empty()
 
                 if not st.session_state.get("start_learning_clicked"):
-                    if start_learning_spot.button("Start Learning the documents"):
+                    if start_learning_spot.button("Begynn å lære dokumentene"):
                         st.session_state["start_learning_clicked"] = True
                         start_learning_spot.empty()
                         search_and_process_in_database()
