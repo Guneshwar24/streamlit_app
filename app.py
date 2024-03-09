@@ -59,7 +59,7 @@ def main():
     local_css("styles.css")  # Update with the correct path if needed
 
     st.markdown(
-        "<h1 style='text-align: center; font-size: 40px;'>The Next-Generation Lawyer Training Experience</h1>",
+        "<h1 style='text-align: center; font-size: 40px;'> LegalPredictors Simulator</h1>",
         unsafe_allow_html=True,
     )
 
@@ -71,7 +71,7 @@ def main():
     with center_col:
         if not st.session_state["authenticated"]:
             st.image("image.webp")  # Update with the correct path if needed
-            if st.button("Login"):
+            if st.button("Logg inn"):
                 st.session_state["authenticated"] = True
                 st.experimental_rerun()
         else:

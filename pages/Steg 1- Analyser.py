@@ -12,12 +12,12 @@ def local_css(file_name):
 def run():
     st.set_page_config(layout="wide")
     local_css("styles_1.css")  # Update with the correct path if needed
-    st.title("Strength and Weaknesses of the Case")
+    st.title("Styrker og svakheter i saken")
 
     if "analysis_stage" not in st.session_state:
         st.session_state.analysis_stage = 0
 
-    if st.button("Analyze Document"):
+    if st.button("Analyser dokumentet"):
         st.session_state.analysis_stage = 1
 
     # Arguments in favor
@@ -58,17 +58,17 @@ def display_arguments_table(in_favor=True):
     """Displays the arguments table with styles."""
     if in_favor:
         html_content = """
-        ### Arguments in Favor of the Merger: 
-        <span style='color: green;'>1. **Promotes Economic Efficiency:** *United States v. General Dynamics Corp.* (1974), *FTC v. Procter & Gamble Co.* (1967).</span><br>
-        <span style='color: green;'>2. **Lack of Substantial Market Overlap:** *United States v. Marine Bancorporation, Inc.* (1974), *United States v. Baker Hughes Inc.* (1990).</span><br>
-        <span style='color: green;'>3. **Necessary for Competitive Survival:** *United States v. Citizens & Southern National Bank* (1975), *United States v. First City National Bank of Houston* (1967).</span><br>
+        ### Argumenter som taler for: 
+        <span style='color: green;'>1. **Bruker jordbrukshensyn som et relevant hensyn:** *Rt-2004-1092* (1974), LA-2005-1939.</span><br>
+        <span style='color: green;'>2. **Legger vekt på at lovens byggeforbud var tidsbegrenset:** Rt-1970-67, *LA-2003-1221*, *LG-1999-2121*.</span><br>
+        <span style='color: green;'>3. **Legger vekt på gårdens behov:** 1982-1541 *LH-2001-323*, *LG-2004-544* (1967).</span><br>
         """
     else:
         html_content = """
-        ### Arguments Against the Merger:
-        <span style='color: red;'>1. **Reduces Market Competition:** *United States v. Philadelphia National Bank* (1963), *United States v. Alcoa* (1964).</span><br>
-        <span style='color: red;'>2. **Harmful to Consumers:** *United States v. AT&T Inc.* (2018), *United States v. Aetna Inc.* (2017).</span><br>
-        <span style='color: red;'>3. **Violates Antitrust Principles:** *Standard Oil Co. of New Jersey v. United States* (1911), *United States v. Microsoft Corp.* (2001).</span><br>
+        ### Argumenter som taler mot:
+        <span style='color: red;'>1. **Manglende balanse mellom jordbrukshensyn og andre samfunnsinteresser:** *Rt-2012-1836* (1963).</span><br>
+        <span style='color: red;'>2. **Manglende tilpasning til endrede omstendigheter:** *Rt-2017-1349 (2017)* (2017).</span><br>
+        <span style='color: red;'>3. **Utilstrekkelig hensyn til miljømessige og bærekraftige hensyn:** *Rt-2018-277 (2018)*.</span><br>
         """
 
     st.markdown(html_content, unsafe_allow_html=True)
@@ -78,7 +78,7 @@ def progress_time():
     """Shows a progress bar with a message for a brief moment."""
     # Create a placeholder for the message
     message = st.empty()
-    message.text("Analyzing with AI...")  # Display the message
+    message.text("Argumenter med KI...")  # Display the message
 
     progress = st.progress(0)
     for i in range(100):
@@ -125,7 +125,7 @@ def display_speedometer():
                 "axisLabel": {"color": "auto", "distance": 40, "fontSize": 15},
                 "detail": {
                     "valueAnimation": True,
-                    "formatter": "Highly Likely to win the case ",
+                    "formatter": "Sannsynligheten for  ",
                     "color": "auto",
                 },
                 "data": [{"value": 75}],
