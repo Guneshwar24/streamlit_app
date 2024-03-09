@@ -15,13 +15,13 @@ def local_css(file_name):
 def run():
     st.set_page_config(layout="wide")
     local_css("styles_1.css")  # Update with the correct path if needed
-    st.title("Modern Looking Graphs - Performance Ratings and Historical Data")
+    st.title("Grafer - ytelsesvurderinger og historisk data")
 
     if "analyzed" not in st.session_state:
         # Session state to track if the analysis has been triggered
         st.session_state.analyzed = False
 
-    analyze_button = st.button("Analyze Results")
+    analyze_button = st.button("Analyser resultater")
 
     if analyze_button:
         st.session_state.analyzed = True
@@ -34,9 +34,9 @@ def run():
 def perform_analysis():
     # Define a list of tuples with the function to call and the message to display
     display_elements_with_messages = [
-        (display_radar_chart, "Creating overall strength"),
-        (display_historical_performance, "Generating historical performance"),
-        (display_comparative_performance, "Generating comparative performance"),
+        (display_radar_chart, "Analyserer generell styrke"),
+        (display_historical_performance, "Genererer historisk resultat"),
+        (display_comparative_performance, "Genererer komparativ ytelse"),
     ]
 
     for element, message in display_elements_with_messages:
@@ -60,10 +60,10 @@ def perform_analysis():
 def display_radar_chart():
     categories = [
         "Tone",
-        "Clarity",
-        "Confidence",
-        "Addressed all weaknesses",
-        "Covered all strengths",
+        "Klarhet",
+        "selvtillit",
+        "Har tatt tak i alle svakhetene",
+        "Har tatt tak i alle styrkene",
     ]
     # Sample ratings for after training
     ratings_after = [4, 4.5, 4.2, 3.8, 4.7]
@@ -77,7 +77,7 @@ def display_radar_chart():
             r=ratings_before,
             theta=categories,
             fill="toself",
-            name="Before Training",
+            name="F⌀r Trening",
             marker_color="red",
         )
     )
@@ -88,7 +88,7 @@ def display_radar_chart():
             r=ratings_after,
             theta=categories,
             fill="toself",
-            name="After Training",
+            name="Etter Trening",
             marker_color="blue",
         )
     )
@@ -102,22 +102,22 @@ def display_radar_chart():
 
 
 def display_historical_performance():
-    st.subheader("Historical Performance Improvement")
+    st.subheader("Historisk ytelsesforbedring")
     performance_scores = [70, 80, 95, 90, 95]
 
     df_history = pd.DataFrame(
         {
-            "Month": ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
-            "Performance": performance_scores,
+            "Måneder": ["Runde 1", "Runde 2", "Runde 3", "Runde 4", "Runde 5"],
+            "Ytelse": performance_scores,
         }
     )
 
     fig_history = px.line(
         df_history,
-        x="Month",
-        y="Performance",
+        x="Måneder",
+        y="Ytelse",
         markers=True,
-        title="Performance Over Time",
+        title="Ytelse Over Tid",
     )
     fig_history.update_traces(line=dict(width=3))
     fig_history.update_layout(
@@ -130,24 +130,24 @@ def display_historical_performance():
 
 
 def display_comparative_performance():
-    st.subheader("Comparative Performance")
+    st.subheader("Komparativ ytelse")
 
     data = {
-        "Metric": ["Accuracy", "Speed", "Consistency"],
-        "Your Score": [75, 80, 85],
-        "Average Peer Score": [60, 55, 53],
+        "Metric": ["N⌀yaktighet", "Hastighet", "Konsistens"],
+        "Din Score": [75, 80, 85],
+        "Gjennomsnittlig Kollega score": [60, 55, 53],
     }
     df_comparison = pd.DataFrame(data)
 
     st.table(
         df_comparison.style.format(
-            subset=["Your Score", "Average Peer Score"], formatter="{:.2f}"
+            subset=["Din Score", "Gjennomsnittlig Kollega score"], formatter="{:.2f}"
         )
         .bar(
-            subset=["Your Score"], color="#5fba7d", width=100
+            subset=["Din Score"], color="#5fba7d", width=100
         )  # Full width for green bars
         .bar(
-            subset=["Average Peer Score"], color="#FFA07A", width=50
+            subset=["Gjennomsnittlig Kollega score"], color="#FFA07A", width=50
         )  # Reduced width for orange bars
     )
 

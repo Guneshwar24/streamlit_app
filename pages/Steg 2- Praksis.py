@@ -14,7 +14,7 @@ def local_css(file_name):
 def run():
     st.set_page_config(layout="wide")
     local_css("styles_1.css")  # Update with the correct path if needed
-    st.title("AI Training Simulator")
+    st.title("KI Treningssimulator")
 
     # Create three columns. The image will be in the middle column to centralize it.
     col1, col2, col3 = st.columns(
@@ -23,11 +23,11 @@ def run():
 
     with col2:  # This ensures that the image is placed in the middle column
         # Display the AI image. Replace 'image2.jpg' with the path to your AI image
-        st.image("image2.jpg", caption="AI Assistant", width=500)
+        st.image("image2.jpg", caption="KI Assistent", width=500)
 
     # Note: The button and any other elements you want centralized should also be included in this 'with' block if desired
-    if st.button("Start Practice Session"):
-        st.write("Argue for and against your case...")
+    if st.button("Start Treningssimulasjonen"):
+        st.write("Argumenter for saken")
         simulate_audio_activity()
 
 
@@ -58,7 +58,7 @@ def simulate_audio_activity():
             go.Scatter(x=df_audio["Time"], y=df_audio["Level"], fill="tozeroy")
         )
         fig.update_layout(
-            title="Simulated AI Audio Feedback", xaxis_title="Time", yaxis_title="Level"
+            title="Simuler KI-lydtilbakemelding", xaxis_title="Tid", yaxis_title="Niv"
         )
 
         chart_placeholder.plotly_chart(fig, use_container_width=True)
@@ -66,7 +66,9 @@ def simulate_audio_activity():
         # Update progress to simulate time passing
         time.sleep(1)  # Simulate a delay, mimicking real-time feedback
 
-    st.success("Practice session completed!")
+    progress_bar.empty()  # Clear progress bar after completion
+
+    st.success("Treningssesjon fullført!")
 
 
 if __name__ == "__main__":
